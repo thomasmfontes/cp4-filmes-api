@@ -1,0 +1,6 @@
+@CP4.Api_HostAddress = http://localhost:5206
+
+GET {{CP4.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

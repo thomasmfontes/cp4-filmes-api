@@ -1,0 +1,23 @@
+## Pastas de build e binários
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Testes e Cobertura
+TestResults/
+[Tt]est[Rr]esult*/
+
+## Arquivos de SO
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
