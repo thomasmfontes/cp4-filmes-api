@@ -1,23 +1,74 @@
-## Pastas de build e binários
+## Visual Studio & .NET .gitignore
+## Auto-generated for CP4 .NET 8 Clean Architecture Project
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
 
-## Visual Studio
+# Visual Studio files
 .vs/
 *.user
+*.userosscache
 *.suo
+*.userprefs
+*.sln.docstates
+*.dbmdl
+*.jsproj.user
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Code Coverage
+*.opencover.xml
+*.coverage
+*.coveragexml
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
 *.userosscache
 *.sln.docstates
 
-## Testes e Cobertura
-TestResults/
-[Tt]est[Rr]esult*/
-
-## Arquivos de SO
+# Windows thumbnail cache & temporary files
 Thumbs.db
 ehthumbs.db
-Desktop.ini
+[Dd]esktop.ini
 $RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+
+# macOS specific
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# Application Insights & local publish
+publish/
+*.publishproj
