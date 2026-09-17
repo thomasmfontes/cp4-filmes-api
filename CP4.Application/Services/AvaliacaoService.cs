@@ -23,9 +23,16 @@ namespace CP4.Application.Services
             _logger = logger;
         }
 
-        public async Task<IEnumerable<AvaliacaoResponseDto>> ObterPorFilmeIdAsync(int filmeId)
+        public async Task<IEnumerable<AvaliacaoResponseDto>?> ObterPorFilmeIdAsync(int filmeId)
         {
             _logger.LogInformation("Listando avaliacoes do filme ID: {FilmeId}", filmeId);
+
+            var filmeExiste = await _filmeRepository.ExisteAsync(filmeId);
+            if (!filmeExiste)
+            {
+                _logger.LogWarning("Filme ID {FilmeId} não encontrado ao listar avaliações", filmeId);
+                return null;
+            }
 
             var avaliacoes = await _avaliacaoRepository.ObterPorFilmeIdAsync(filmeId);
             return avaliacoes.Select(a => a.ToDto());

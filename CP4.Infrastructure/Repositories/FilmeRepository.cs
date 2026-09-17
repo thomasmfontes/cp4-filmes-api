@@ -74,7 +74,7 @@ namespace CP4.Infrastructure.Repositories
 
         public async Task<bool> ExisteAsync(int id)
         {
-            return await _context.Filmes.AnyAsync(f => f.Id == id);
+            return await _context.Filmes.CountAsync(f => f.Id == id) > 0;
         }
     }
 }

@@ -29,11 +29,16 @@ namespace CP4.Api.Controllers
             Summary = "Lista avaliações por filme",
             Description = "Retorna todas as notas e comentários dos usuários para um filme específico.")]
         [ProducesResponseType(typeof(IEnumerable<AvaliacaoResponseDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
         public async Task<IActionResult> ObterPorFilmeId(int filmeId)
         {
             _logger.LogInformation("Listando avaliacoes para filme ID: {FilmeId}", filmeId);
             var resultado = await _avaliacaoService.ObterPorFilmeIdAsync(filmeId);
+
+            if (resultado == null)
+                return NotFound(new { Message = $"Filme com ID {filmeId} não encontrado." });
+
             return Ok(resultado);
         }
 

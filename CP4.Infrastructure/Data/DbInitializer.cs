@@ -94,7 +94,7 @@ namespace CP4.Infrastructure.Data
         {
             try
             {
-                if (!context.Filmes.Any())
+                if (context.Filmes.Count() == 0)
                 {
                     logger.LogInformation("Populando dados iniciais de demonstração (Seed Data)...");
 
