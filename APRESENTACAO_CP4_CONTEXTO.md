@@ -114,9 +114,9 @@
 - **O que falar:**
   > *"Por fim, na parte de observabilidade, implementamos o endpoint `/health`.*  
   > *Ele monitora não apenas o runtime da aplicação, mas também a integridade da conexão com a dependência do banco de dados.*  
-  > *Também temos o Application Insights configurado para coleta de telemetria e o `GlobalExceptionMiddleware` com injeção de `ILogger` para captura de logs estruturados de qualquer falha na aplicação.*  
-  > *Com isso, atendemos 100% dos requisitos de arquitetura, qualidade e resiliência propostos pelo CP4. Estamos abertos a dúvidas!"*
-- **O que mostrar na tela:** Acessar a rota `http://localhost:XXXX/health` no navegador e mostrar o JSON com `"status": "Healthy"`.
+  > *E para fechar com chave de ouro: conectamos o **Application Insights** diretamente na nossa assinatura da Azure no recurso `appinsights-cp4-filmes`. Como o senhor pode ver aqui na aba do **Live Metrics**, temos nosso servidor online em tempo real, capturando a taxa de requisições por segundo, as durações e as respostas 429 registradas.*  
+  > *Com isso, atendemos 100% dos requisitos de arquitetura limpa, alta performance, testes e observabilidade propostos pelo CP4. Estamos abertos a dúvidas!"*
+- **O que mostrar na tela:** Mostrar o endpoint `http://localhost:5206/health` com status `"Healthy"` e alternar para a aba do **Azure Portal (Live Metrics)** exibindo os gráficos ao vivo.
 
 ---
 
@@ -164,13 +164,22 @@
 
 ---
 
+### ❓ Pergunta 7: "E se o professor pedir: 'Vocês conseguem me mostrar o Application Insights funcionando?'"
+**Resposta Recomendada / Demonstração:**
+> *"Com certeza, professor! Como injetamos o SDK `Microsoft.ApplicationInsights.AspNetCore` no `Program.cs`, temos duas opções de visualização:*
+> 1. *Pelo próprio Visual Studio: no menu **View -> Other Windows -> Application Insights Search**, onde o Visual Studio renderiza em tempo real todos os eventos de telemetria, requisições HTTP, dependências e logs estruturados capturados da aplicação.*
+> 2. *Ou injetando a Connection String do Azure no `appsettings.json`, onde os dados são transmitidos para o painel de **Live Metrics** do portal da nuvem."*
+
+---
+
 ## ✅ 5. CHECKLIST PRÉ-APRESENTAÇÃO
 
 1. [ ] **Verificar compilação:** Dar `Ctrl + Shift + B` no Visual Studio para garantir **0 erros e 0 avisos**.
 2. [ ] **Rodar os testes:** No Test Explorer, garantir que os 14 testes estão passando.
 3. [ ] **Iniciar a API:** Pressionar `Ctrl + F5` para subir a API sem o depurador preso.
 4. [ ] **Deixar abertas as seguintes abas no navegador:**
-   - Aba 1: `http://localhost:XXXX/` (Swagger UI)
-   - Aba 2: `http://localhost:XXXX/health` (Health Check)
-5. [ ] **Testar o Rate Limit previamente:** Clicar rapidamente no Swagger para ter certeza de que o 429 é exibido.
-6. [ ] **Respirar fundo:** O projeto está 100% aderente a todos os 10 critérios da grade do professor!
+   - Aba 1: `http://localhost:5206/` (Swagger UI da API)
+   - Aba 2: `http://localhost:5206/health` (Health Check com JSON de status do banco)
+   - Aba 3: **Azure Portal - Live Metrics** (`portal.azure.com` aberto no recurso `appinsights-cp4-filmes` mostrando o servidor online e os gráficos em tempo real)
+5. [ ] **Testar o Rate Limit previamente:** Clicar rapidamente no Swagger para ter certeza de que o 429 é exibido e que a taxa sobe no Live Metrics do Azure.
+6. [ ] **Respirar fundo:** O projeto está impecável e 100% aderente a todos os critérios da grade!
