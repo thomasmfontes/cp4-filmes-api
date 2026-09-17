@@ -39,6 +39,9 @@ namespace CP4.Api.Controllers
             if (resultado == null)
                 return NotFound(new { Message = $"Filme com ID {filmeId} não encontrado." });
 
+            if (!resultado.Any())
+                return NotFound(new { Message = $"Nenhuma avaliação encontrada para o filme com ID {filmeId}." });
+
             return Ok(resultado);
         }
 
