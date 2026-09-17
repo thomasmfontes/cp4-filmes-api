@@ -8,11 +8,13 @@ namespace CP4.Api.Middlewares
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<GlobalExceptionMiddleware> _logger;
+        private readonly IHostEnvironment _env;
 
-        public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
+        public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger, IHostEnvironment env)
         {
             _next = next;
             _logger = logger;
+            _env = env;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -29,7 +31,12 @@ namespace CP4.Api.Middlewares
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro interno nao tratado: {Mensagem}", ex.Message);
-                await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, "Ocorreu um erro interno no servidor. Tente novamente mais tarde.");
+
+                var errorDetails = _env.IsDevelopment()
+                    ? $"{ex.Message}{(ex.InnerException != null ? " --> " + ex.InnerException.Message : "")}"
+                    : "Ocorreu um erro interno no servidor. Tente novamente mais tarde.";
+
+                await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, errorDetails);
             }
         }
 

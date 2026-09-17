@@ -148,6 +148,24 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // ============================================================================
+// INICIALIZAÇÃO E SEED DO BANCO DE DADOS (Criação automática de tabelas e dados)
+// ============================================================================
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        DbInitializer.Initialize(context, logger);
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "ATENÇÃO: Falha ao inicializar o banco de dados e aplicar seed: {Message}", ex.Message);
+    }
+}
+
+// ============================================================================
 // PIPELINE HTTP
 // ============================================================================
 
